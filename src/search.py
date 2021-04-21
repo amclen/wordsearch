@@ -12,6 +12,8 @@ def search(input_path, output_path):
                     if coords:
                         solution[word] = coords
 
+    write_output(solution, output_path)
+
 
 def find_word(r, c, max_row, max_col, word, grid):
     directions = [(1,0),(1,1),(0,1),(0,-1),(-1,-1),(-1,0),(1,-1),(-1,1)]
@@ -47,4 +49,12 @@ def parse_input(input_path):
         grid.append(line.strip().split(','))
     
     return (words, grid)
+
+
+def write_output(solution, output_path):
+    out_file = open(output_path, "w")
+
+    for word in solution:
+       out_file.write('%s: %s\n'%(word, str(solution[word]).lstrip('[').rstrip(']')))
     
+    out_file.close()
