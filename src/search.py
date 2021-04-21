@@ -17,24 +17,24 @@ def search(input_path, output_path):
     write_output(solution, output_path)
 
 
-def find_word(r, c, max_row, max_col, word, grid):
+def find_word(row, col, max_row, max_col, word, grid):
     directions = [(1,0),(1,1),(0,1),(0,-1),(-1,-1),(-1,0),(1,-1),(-1,1)]
     
     for x, y in directions:
-        res = [(c, r)]
-        curr=r+x
-        curc=c+y
+        initial_coordinate = [(col, row)]
+        cur_row = row + x
+        cur_col = col + y
 
-        curres = res
+        res = initial_coordinate
         for i in range(1, len(word)):
-            if curr>=max_row or curr<0 or curc>=max_col or curc<0:
+            if cur_row>=max_row or cur_row<0 or cur_col>=max_col or cur_col<0:
                 break
 
-            if grid[curr][curc] != word[i]:
+            if grid[cur_row][cur_col] != word[i]:
                 break
 
-            curres.append((curc, curr))
-            if len(curres)==len(word):
-                return curres
-            curr+=x
-            curc+=y
+            res.append((cur_col, cur_row))
+            if len(res)==len(word):
+                return res
+            cur_row += x
+            cur_col += y
